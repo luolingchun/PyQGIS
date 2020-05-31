@@ -33,7 +33,7 @@ class MyApp(QDialog):
         self.vl.addWidget(self.label)
 
         self.mapCanvas = QgsMapCanvas()
-        self.mapCanvas.setCanvasColor(QColor(0, 0, 0))
+        # self.mapCanvas.setCanvasColor(QColor(0, 0, 0))
         self.vl.addWidget(self.mapCanvas)
 
         self.pushbuttonStart.clicked.connect(self.add_layer)
@@ -42,22 +42,24 @@ class MyApp(QDialog):
     def add_layer(self):
         QgsProject.instance().removeAllMapLayers()
 
-        shp = r"world.shp"
+        shp = r"../data/world.shp"
         layer = QgsVectorLayer(shp, "shp", "ogr")
+        print(layer.isValid())
         QgsProject.instance().addMapLayer(layer)
         self.mapCanvas.setLayers([layer])
+        self.mapCanvas.setExtent(layer.extent())
 
         # crsSrc = QgsCoordinateReferenceSystem("EPSG:4326")
         # crsDest = QgsCoordinateReferenceSystem("EPSG:3857")
         crsDest = QgsCoordinateReferenceSystem(
             "PROJ:+proj=ortho +lat_0=0 +lon_0=100 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs")
 
-        QgsProject.instance().setCrs(crsDest)
+        # QgsProject.instance().setCrs(crsDest)
         self.mapCanvas.setDestinationCrs(crsDest)
-        self.mapCanvas.setExtent(QgsRectangle(-6378137, -6378137, 6378137, 6378137))
+        # self.mapCanvas.setExtent(QgsRectangle(-6378137, -6378137, 6378137, 6378137))
         self.mapCanvas.refresh()
 
-        self.set_crs()
+        # self.set_crs()
 
     def set_crs(self):
         self.moveThread = MoveThread(self)
