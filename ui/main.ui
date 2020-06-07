@@ -96,7 +96,7 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout_Qt"/>
+    <addaction name="actionAboutQt"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menufile"/>
@@ -107,18 +107,6 @@
    <addaction name="menuhelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QToolBar" name="toolBarProject">
-   <property name="windowTitle">
-    <string>toolBarProject</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionOpen"/>
-  </widget>
   <widget class="QDockWidget" name="dockWidget">
    <property name="windowTitle">
     <string>layer</string>
@@ -127,66 +115,6 @@
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents"/>
-  </widget>
-  <widget class="QToolBar" name="toolBarAction">
-   <property name="windowTitle">
-    <string>toolBarAction</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionPan"/>
-   <addaction name="actionZoomin"/>
-   <addaction name="actionZoomout"/>
-   <addaction name="actionIdentity"/>
-  </widget>
-  <widget class="QToolBar" name="toolBarLayer">
-   <property name="windowTitle">
-    <string>toolBarLayer</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>true</bool>
-   </attribute>
-   <addaction name="actionShapefile"/>
-   <addaction name="actionCsv"/>
-   <addaction name="actionPostGIS"/>
-   <addaction name="actionWFS"/>
-   <addaction name="actionGeotiff"/>
-   <addaction name="actionXYZ"/>
-  </widget>
-  <widget class="QToolBar" name="toolBarMapTool">
-   <property name="windowTitle">
-    <string>toolBarMapTool</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionPoint"/>
-   <addaction name="actionLine"/>
-   <addaction name="actionPolygon"/>
-   <addaction name="actionRectangle"/>
-   <addaction name="actionCircle"/>
-  </widget>
-  <widget class="QToolBar" name="toolBarProjection">
-   <property name="windowTitle">
-    <string>toolBarProjection</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionTransform"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -278,7 +206,7 @@
     <string>Pan</string>
    </property>
   </action>
-  <action name="actionAbout_Qt">
+  <action name="actionAboutQt">
    <property name="text">
     <string>About Qt</string>
    </property>
