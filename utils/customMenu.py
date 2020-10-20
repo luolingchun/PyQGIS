@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import QMenu, QAction
 from qgis.core import QgsLayerTreeNode, QgsLayerTree, QgsMapLayerType
 from qgis.gui import QgsLayerTreeViewMenuProvider, QgsLayerTreeView, QgsLayerTreeViewDefaultActions, QgsMapCanvas
 
+from widgets.attributeDialog import AttributeDialog
+
 
 class CustomMenuProvider(QgsLayerTreeViewMenuProvider):
     def __init__(self, layerTreeView: QgsLayerTreeView, mapCanvas: QgsMapCanvas, *args, **kwargs):
@@ -37,9 +39,9 @@ class CustomMenuProvider(QgsLayerTreeViewMenuProvider):
             layer = self.layerTreeView.currentLayer()
             if layer.type() == QgsMapLayerType.VectorLayer:
                 # 矢量图层
-                openAttributeDialog = QAction('open Attribute Table', menu)
-                openAttributeDialog.triggered.connect(lambda: print(111))
-                menu.addAction(openAttributeDialog)
+                actionOpenAttributeDialog = QAction('open Attribute Table', menu)
+                actionOpenAttributeDialog.triggered.connect(lambda: self.openAttributeDialog(layer))
+                menu.addAction(actionOpenAttributeDialog)
             else:
                 # 栅格图层
                 pass
@@ -47,3 +49,8 @@ class CustomMenuProvider(QgsLayerTreeViewMenuProvider):
             print('node type is none')
 
         return menu
+
+    def openAttributeDialog(self, layer):
+        self.attributeDialog = AttributeDialog(self.mapCanvas, parent=self.mapCanvas.parent())
+        self.attributeDialog.openAttributeDialog(layer)
+        self.attributeDialog.show()

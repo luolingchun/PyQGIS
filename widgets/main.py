@@ -9,7 +9,7 @@ from qgis.gui import QgsMapCanvas, QgsMapToolZoom, QgsMapToolPan, QgsMapToolIden
     QgsLayerTreeMapCanvasBridge
 
 from ui.main_ui import Ui_MainWindow
-from utils.CustomMenu import CustomMenuProvider
+from utils.customMenu import CustomMenuProvider
 from widgets.PostGIS import PostGISDialog
 from widgets.custom_maptool import RectangleMapTool, PolygonMapTool, PointMapTool, LineMapTool
 
@@ -127,7 +127,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """打开shp"""
         data_file, ext = QFileDialog.getOpenFileName(self, '打开', '', '*.shp')
         if data_file:
-            layer = QgsVectorLayer(data_file, "shp", "ogr")
+            layer = QgsVectorLayer(data_file, os.path.splitext(os.path.basename(data_file))[0], "ogr")
             self.addLayer(layer)
 
     def actionCsvTriggered(self):
