@@ -2,7 +2,7 @@
 # @Author  : llc
 # @Time    : 2020/4/21 21:44
 from PyQt5.QtGui import QPainter, QFont, QColor
-from PyQt5.QtWidgets import QSplashScreen, QApplication
+from PyQt5.QtWidgets import QSplashScreen, QApplication, QDesktopWidget
 
 
 class SplashScreen(QSplashScreen):
@@ -13,11 +13,16 @@ class SplashScreen(QSplashScreen):
         # pixmap = QPixmap(r'000.jpg')
         # self.setPixmap(pixmap)
         self.resize(300, 200)
-        self.move(int((QApplication.desktop().width() - self.width()) / 2),
-                  int((QApplication.desktop().height() - self.height()) / 2))
+        self.move_center()
 
     def mousePressEvent(self, event):
         pass
+
+    def move_center(self):
+        # 获取屏幕分辨率
+        screen = QDesktopWidget().screenGeometry()
+        size = self.geometry()
+        self.move((screen.width() - size.width()) / 2, (screen.height() - size.height()) / 2)
 
     def paintEvent(self, event):
         # super(SplashScreen, self).paintEvent(event)

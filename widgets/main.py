@@ -3,13 +3,13 @@
 # @Time    : 2020/4/21 21:40
 import os
 
-from PyQt5.QtWidgets import QMainWindow, QFileDialog, QHBoxLayout, QVBoxLayout, QMessageBox, QDialog
-from qgis.core import QgsVectorLayer, QgsProject, QgsLayerTreeModel, QgsDataSourceUri, QgsRasterLayer, \
-    QgsCoordinateReferenceSystem, QgsCoordinateTransformContext, QgsPointXY
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QHBoxLayout, QVBoxLayout, QMessageBox
+from qgis.core import QgsVectorLayer, QgsProject, QgsLayerTreeModel, QgsDataSourceUri, QgsRasterLayer
 from qgis.gui import QgsMapCanvas, QgsMapToolZoom, QgsMapToolPan, QgsMapToolIdentifyFeature, QgsLayerTreeView, \
-    QgsLayerTreeMapCanvasBridge, QgsVertexMarker
+    QgsLayerTreeMapCanvasBridge
 
 from ui.main_ui import Ui_MainWindow
+from utils.CustomMenu import CustomMenuProvider
 from widgets.PostGIS import PostGISDialog
 from widgets.custom_maptool import RectangleMapTool, PolygonMapTool, PointMapTool, LineMapTool
 
@@ -80,6 +80,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.actionPan.triggered.connect(self.actionPanTriggered)
         # self.actionIdentify.triggered.connect(self.actionIdentifyTriggered)
 
+        # 图层右键菜单
+        self.customMenuProvider = CustomMenuProvider(self.layerTreeView, self.mapCanvas)
+        self.layerTreeView.setMenuProvider(self.customMenuProvider)
+        # self.layerTreeRegistryBridge = QgsLayerTreeRegistryBridge(PROJECT.layerTreeRoot(), PROJECT, self)
+
     def actionOpenTriggered(self):
         """打开工程"""
         data_file, ext = QFileDialog.getOpenFileName(self, '打开', '', '工程文件(*.qgs , *.qgz)')
@@ -114,6 +119,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print(type(feature))
 
         QMessageBox.information(self, '信息', ''.join(feature.attributes()))
+
+    def actionAddGroupTriggered(self):
+        PROJECT.layerTreeRoot().addGroup('group1')
 
     def actionShapefileTriggered(self):
         """打开shp"""
