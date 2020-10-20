@@ -21,6 +21,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.first_flag = True
+        self.setWindowTitle('PyQGIS')
         # 调整窗口大小
         self.resize(800, 600)
         # 初始化图层树
