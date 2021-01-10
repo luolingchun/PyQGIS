@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author  : llc
 # @Time    : 2020/4/19 16:23
+from PyQt5.QtCore import Qt
 from qgis.core import QgsApplication
 
 from splash import SplashScreen
@@ -8,7 +9,8 @@ from widgets.main import MainWindow
 from config import setup_env
 
 setup_env()
-
+# 适应高分辨率
+QgsApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
 # 创建对QgsApplication的引用，第二个参数设置为False将禁用GUI
 qgs = QgsApplication([], True)
 
