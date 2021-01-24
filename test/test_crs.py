@@ -56,7 +56,7 @@ class MyApp(QDialog):
 
         # QgsProject.instance().setCrs(crsDest)
         self.mapCanvas.setDestinationCrs(crsDest)
-        # self.mapCanvas.setExtent(QgsRectangle(-6378137, -6378137, 6378137, 6378137))
+        self.mapCanvas.setExtent(QgsRectangle(-6378137, -6378137, 6378137, 6378137))
         self.mapCanvas.refresh()
 
         # self.set_crs()
