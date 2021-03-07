@@ -5,11 +5,15 @@
 import os
 
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QVBoxLayout, QHBoxLayout
-from qgis.gui import QgsLayerTreeMapCanvasBridge, QgsLayerTreeView, QgsMapCanvas, QgsMapToolIdentifyFeature
-from qgis.core import QgsVectorLayer, QgsProject, QgsLayerTreeModel, QgsApplication, QgsFeature
+from qgis.gui import QgsLayerTreeMapCanvasBridge, QgsLayerTreeView, QgsMapCanvas, QgsMapToolIdentifyFeature,QgisInterface
+from qgis.core import QgsVectorLayer, QgsProject, QgsLayerTreeModel, QgsApplication, QgsFeature, QgsDataSourceUri, \
+    QgsVectorDataProvider
+from qgis.utils import iface
+
+iface
 
 from main_ui import Ui_MainWindow
-
+QgsVectorDataProvider
 
 class Window(QMainWindow, Ui_MainWindow):
     def __init__(self):

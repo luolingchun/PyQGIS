@@ -11,7 +11,7 @@ PyQGIS 二次开发独立应用
 ## 编译
 
 ```shell
-# 管理员运行，基于QGIS 3.10测试
-1. "C:\Program Files\QGIS 3.10\bin\python-qgis-ltr.bat" -m pip install pyinstaller
+# 管理员运行，基于QGIS 3.16.4测试
+1. "C:\Program Files\QGIS 3.16\bin\python-qgis-ltr.bat" -m pip install pyinstaller
 2. scripts\build.cmd
 ```

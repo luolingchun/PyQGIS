@@ -132,9 +132,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.addLayer(layer)
 
     def actionCsvTriggered(self):
-        """加载csv数据，TODO:存在问题,图层无效"""
+        """加载csv数据"""
         data_file, ext = QFileDialog.getOpenFileName(self, '打开', '', '*.csv')
         if data_file:
+            # 去掉盘符，否则图层无效
+            data_file = os.path.splitdrive(data_file)[1]
             uri = f"file://{data_file}?delimiter=,&xField=x&yField=y"
             print(uri)
             layer = QgsVectorLayer(uri, "point", "delimitedtext")
