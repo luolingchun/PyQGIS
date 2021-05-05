@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author  : llc
 # @Time    : 2020/4/21 21:44
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QSplashScreen
+from qgis.PyQt.QtGui import QPixmap
+from qgis.PyQt.QtWidgets import QSplashScreen
 
 
 class NewSplashScreen(QSplashScreen):

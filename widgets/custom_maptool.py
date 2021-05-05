@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author  : llc
 # @Time    : 2020/6/7 15:30
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor
+from qgis.PyQt.QtCore import Qt
+from qgis.PyQt.QtGui import QColor
 from qgis.core import QgsRectangle, QgsPointXY, QgsWkbTypes
 from qgis.gui import QgsMapToolEmitPoint, QgsRubberBand, QgsVertexMarker
 

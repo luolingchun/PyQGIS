@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author  : llc
 # @Time    : 2020/10/19 11:38
-from PyQt5.QtWidgets import QMenu, QAction
+from qgis.PyQt.QtWidgets import QMenu, QAction
 from qgis.core import QgsLayerTreeNode, QgsLayerTree, QgsMapLayerType
 from qgis.gui import QgsLayerTreeViewMenuProvider, QgsLayerTreeView, QgsLayerTreeViewDefaultActions, QgsMapCanvas
 

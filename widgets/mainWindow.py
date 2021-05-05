@@ -3,8 +3,8 @@
 # @Time    : 2020/4/21 21:40
 import os
 
-from PyQt5.QtWidgets import QMainWindow, QFileDialog, QHBoxLayout, QVBoxLayout, QMessageBox
-from qgis.core import QgsVectorLayer, QgsProject, QgsLayerTreeModel, QgsDataSourceUri, QgsRasterLayer
+from qgis.PyQt.QtWidgets import QMainWindow, QFileDialog, QHBoxLayout, QVBoxLayout, QMessageBox
+from qgis.core import QgsVectorLayer, QgsProject, QgsLayerTreeModel, QgsDataSourceUri, QgsRasterLayer,QgsLayerTree
 from qgis.gui import QgsMapCanvas, QgsMapToolZoom, QgsMapToolPan, QgsMapToolIdentifyFeature, QgsLayerTreeView, \
     QgsLayerTreeMapCanvasBridge
 
@@ -35,14 +35,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         hl.addWidget(self.mapCanvas)
 
         # 建立桥梁
-        model = QgsLayerTreeModel(PROJECT.layerTreeRoot(), self)
-        model.setFlag(QgsLayerTreeModel.AllowNodeRename)
-        model.setFlag(QgsLayerTreeModel.AllowNodeReorder)
-        model.setFlag(QgsLayerTreeModel.AllowNodeChangeVisibility)
-        model.setFlag(QgsLayerTreeModel.ShowLegendAsTree)
-        model.setAutoCollapseLegendNodes(10)
-        self.layerTreeView.setModel(model)
-        self.layerTreeBridge = QgsLayerTreeMapCanvasBridge(PROJECT.layerTreeRoot(), self.mapCanvas)
+        self.model = QgsLayerTreeModel(PROJECT.layerTreeRoot(), self)
+        self.model.setFlag(QgsLayerTreeModel.AllowNodeRename)
+        self.model.setFlag(QgsLayerTreeModel.AllowNodeReorder)
+        self.model.setFlag(QgsLayerTreeModel.AllowNodeChangeVisibility)
+        self.model.setFlag(QgsLayerTreeModel.ShowLegendAsTree)
+        self.model.setAutoCollapseLegendNodes(10)
+        self.layerTreeView.setModel(self.model)
+        self.layerTreeBridge = QgsLayerTreeMapCanvasBridge(PROJECT.layerTreeRoot(), self.mapCanvas, self)
         # 显示经纬度
         self.mapCanvas.xyCoordinates.connect(self.showLngLat)
 

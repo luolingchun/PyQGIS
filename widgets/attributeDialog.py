@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author  : llc
 # @Time    : 2020/10/20 15:01
-from PyQt5.QtWidgets import QDialog, QHBoxLayout
+from qgis.PyQt.QtWidgets import QDialog, QHBoxLayout
 from qgis.core import QgsVectorLayerCache
 from qgis.gui import QgsAttributeTableView, QgsAttributeTableModel, QgsAttributeTableFilterModel
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author  : llc
 # @Time    : 2020/6/7 12:33
-from PyQt5.QtWidgets import QDialog
+from qgis.PyQt.QtWidgets import QDialog
 
 from ui.PostGIS_ui import Ui_Dialog
 
