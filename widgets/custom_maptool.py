@@ -3,8 +3,9 @@
 # @Time    : 2020/6/7 15:30
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtGui import QColor
-from qgis.core import QgsRectangle, QgsPointXY, QgsWkbTypes
-from qgis.gui import QgsMapToolEmitPoint, QgsRubberBand, QgsVertexMarker
+from qgis.core import Qgis
+from qgis.core import QgsRectangle, QgsPointXY, QgsWkbTypes, QgsSnappingConfig, QgsTolerance
+from qgis.gui import QgsMapToolEmitPoint, QgsRubberBand, QgsVertexMarker, QgsSnapIndicator
 
 
 class PointMapTool(QgsMapToolEmitPoint):
@@ -29,10 +30,24 @@ class LineMapTool(QgsMapToolEmitPoint):
     def __init__(self, canvas):
         super(LineMapTool, self).__init__(canvas)
         self.canvas = canvas
+        # 捕捉
+        self.snapIndicator = QgsSnapIndicator(self.canvas)
+        self.snapper = self.canvas.snappingUtils()
+        config = QgsSnappingConfig()
+        config.setEnabled(True)
+        config.setType(QgsSnappingConfig.Vertex)
+        config.setUnits(QgsTolerance.Pixels)
+        config.setTolerance(12)
+        # https://qgis.org/pyqgis/master/core/QgsSnappingConfig.html#qgis.core.QgsSnappingConfig.SnappingMode
+        config.setMode(Qgis.SnappingMode.AllLayers)
+        self.snapper.setConfig(config)
+
         self.rubberBand = QgsRubberBand(self.canvas, True)
         self.rubberBand.setColor(QColor(255, 0, 0, 100))
         self.rubberBand.setWidth(3)
         self.reset()
+
+        self.snapMatchPoint = None
 
     def reset(self):
         self.points = []
@@ -40,7 +55,10 @@ class LineMapTool(QgsMapToolEmitPoint):
         self.rubberBand.reset(True)
 
     def canvasPressEvent(self, e):
-        self.points.append(e.mapPoint())
+        if self.snapMatchPoint:
+            self.points.append(self.snapMatchPoint)
+        else:
+            self.points.append(e.mapPoint())
         self.isEmittingPoint = True
 
     def canvasReleaseEvent(self, e):
@@ -49,6 +67,13 @@ class LineMapTool(QgsMapToolEmitPoint):
             self.isEmittingPoint = False
 
     def canvasMoveEvent(self, e):
+        # 捕捉
+        snapMatch = self.snapper.snapToMap(e.pos())
+        self.snapIndicator.setMatch(snapMatch)
+        if snapMatch.isValid():
+            self.snapMatchPoint = snapMatch.point()
+        else:
+            self.snapMatchPoint = None
         if not self.isEmittingPoint:
             return
         self.cursor_point = e.mapPoint()
